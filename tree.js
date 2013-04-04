@@ -1,11 +1,11 @@
 (function ( $ ) {
-	$.fn.simpleTree = function( options ) {
+	$.fn.goodtree = function( options ) {
 
 		// Default Settings
 		var settings = $.extend({
 			'expand_icon' : 'images/tree/expand.png',
 			'contract_icon' : 'images/tree/contract.png',
-			'class_prefix' : 'simpleTree_',
+			'class_prefix' : 'goodtree_',
 		}, options);
 
 		return this.each(function() {
@@ -15,10 +15,11 @@
 
 			// Add the plus minus buttons
 			$(this).find('li').each(function() {
-				if($(this).children('ul').length > 0) $(this).prepend("<a href='#' onclick='return false;' class='" + settings.class_prefix + "toggle closed'><img class='" + settings.class_prefix + "expand_icon' src='" + settings.expand_icon + "' /></a>");
+				if($(this).children('ul').length > 0) 
+					$(this).prepend("<a href='#' onclick='return false;' class='" + settings.class_prefix + "toggle closed'><img class='" + settings.class_prefix + "expand_icon' src='" + settings.expand_icon + "' /></a>");
 			});
 
-			// Toggle Events
+			// Events
 			$('.' + settings.class_prefix + 'toggle').click(function() {
 				$(this).parent().children('ul').toggle();
 
