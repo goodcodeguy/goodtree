@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Simple Tree View</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../tree.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#tree').simpleTree({
+					'expand_icon': 'images/expand_icon.png',
+					'contract_icon': 'images/contract_icon.png'
+				});
+			});
+		</script>
+
+		<style type="text/css">
+
+			#tree, #tree ul {
+				list-style-type: none;
+			}
+
+			#tree li > span {
+				margin-left: 20px;
+			}
+
+			#tree li > .simpleTree_toggle {
+				position: absolute;
+				display: inline-block;
+				height: 16px;
+				width: 16px;
+			}
+
+		</style>
+
+	</head>
+	<body>
+		<ul id="tree">
+			<li>
+				<span>Menu Item 1</span>
+				<ul>
+					<li>Submenu Item 1</li>
+					<li>Submenu Item 2</li>
+					<li>Submenu Item 3</li>
+				</ul>
+			</li>
+			<li>
+				<span>Menu Item 2</span>
+				<ul>
+					<li>
+						<span>Submenu Item 1</span>
+						<ul>
+							<li>Sub Submenu Item 1</li>
+							<li>Sub Submenu Item 2</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>Menu Item 3</li>
+		</ul>
+	</body>
+</html>
