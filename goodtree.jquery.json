@@ -1,36 +1,37 @@
 {
-    "name": "goodtree",
-    "title": "jQuery GoodTree",
-    "description": "jQuery plugin for TreeView support.",
-    "keywords": [
-        "treeview",
-        "tree",
-        "menu"
-    ],
-    "version": "0.3.3",
-    "author": {
-        "name": "Nick Shepherd",
-        "url": "https://goodcodeguy.com"
-    },
-    "maintainers": [
-        {
-            "name": "Nick Shepherd",
-            "email": "nick@goodcodeguy.com",
-            "url": "http://goodcodeguy.com"
-        }
-    ],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/goodcodeguy/goodtree/blob/master/MIT-LICENSE.txt"
-        }
-    ],
-    "bugs": "https://github.com/goodcodeguy/goodtree/issues",
-    "homepage": "https://github.com/goodcodeguy/goodtree",
-    "docs": "https://github.com/goodcodeguy/goodtree",
-    "download": "https://github.com/goodcodeguy/goodtree/zipball/master",
-    "demo": "http://goodcodeguy.github.com/demos/goodtree/index.html",
-    "dependencies": {
-        "jquery": ">=1.8"
+  "name": "goodtree",
+  "title": "jQuery GoodTree",
+  "description": "jQuery plugin for TreeView support.",
+  "keywords": [
+    "treeview",
+    "tree",
+    "menu",
+    "ui",
+  ],
+  "version": "0.3.3",
+  "author": {
+    "name": "Nick Shepherd",
+    "url": "https://goodcodeguy.com"
+  },
+  "maintainers": [
+    {
+      "name": "Nick Shepherd",
+      "email": "nick@goodcodeguy.com",
+      "url": "http://goodcodeguy.com"
     }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/goodcodeguy/goodtree/blob/master/MIT-LICENSE.txt"
+    }
+  ],
+  "bugs": "https://github.com/goodcodeguy/goodtree/issues",
+  "homepage": "https://github.com/goodcodeguy/goodtree",
+  "docs": "https://github.com/goodcodeguy/goodtree",
+  "download": "https://github.com/goodcodeguy/goodtree/zipball/master",
+  "demo": "http://goodcodeguy.github.com/demos/goodtree/index.html",
+  "dependencies": {
+      "jquery": ">=1.8"
+  }
 }

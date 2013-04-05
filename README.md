@@ -6,12 +6,12 @@ This is a simple jQuery plugin for handling Tree Views.  Example of usage is in 
 
 ## ChangeLog:
 
-#### v0.3.3:
+#### 0.3.3:
 
 - Added setFocus configuration setting and method
 - Refactored a bit for expansion and fixed bugs
 
-#### v0.3.1:
+#### 0.3.1:
 
 - Initial Release
 
