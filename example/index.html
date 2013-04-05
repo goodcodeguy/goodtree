@@ -6,7 +6,7 @@
 		<script src="../src/goodtree.plugin.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				var tree = $('#tree').goodtree({'setFocus': $('#focus')});
+				var tree = $('#tree').goodtree({'setFocus': $('.focus')});
 			});
 		</script>
 
@@ -38,6 +38,10 @@
 					background-image: url(images/contract_icon.png);
 				}
 
+				.focus {
+					background-color: #eee;
+				}
+
 		</style>
 
 	</head>
@@ -58,7 +62,7 @@
 						<span>Submenu Item 1</span>
 						<ul>
 							<li>Sub Submenu Item 1</li>
-							<li id='focus'>Sub Submenu Item 2</li>
+							<li>Sub Submenu Item 2</li>
 						</ul>
 					</li>
 				</ul>
