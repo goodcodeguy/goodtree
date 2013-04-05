@@ -10,35 +10,20 @@
 
 		return this.each(function() {
 
-			// Build Icons
-			var expand_icon = $('<img />', {'class': settings.class_prefix + 'expand_icon', 'src': settings.expand_icon});
-			var contract_icon = $('<img />', {'class': settings.class_prefix + 'contract_icon', 'src': settings.contract_icon});
-			
 			// Hide all of the children Elements
 			$(this).find('ul').hide();
 
 			// Add the plus minus buttons
 			$(this).find('li').each(function() {
 				if($(this).children('ul').length > 0) 
-					$(this).prepend("<a href='#' onclick='return false;' class='" + settings.class_prefix + "toggle closed'><img class='" + settings.class_prefix + "expand_icon' src='" + settings.expand_icon + "' /></a>");
+					$(this).prepend("<div class='" + settings.class_prefix + "toggle closed'></div>");
 			});
 
 			// Events
 			$('.' + settings.class_prefix + 'toggle').click(function() {
 				$(this).parent().children('ul').toggle();
-
-				if($(this).hasClass('open'))
-				{
-					$(this).html('').append(expand_icon.clone());
-					$(this).removeClass('open').addClass('closed');
-				} 
-				else 
-				{
-					$(this).html('').append(contract_icon.clone());
-					$(this).removeClass('closed').addClass('open');
-				}
+				$(this).hasClass('open') ? $(this).removeClass('open').addClass('closed') : $(this).removeClass('closed').addClass('open');
 			});
-
 
 		});
 

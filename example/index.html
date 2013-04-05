@@ -6,10 +6,7 @@
 		<script src="../src/goodtree.plugin.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#tree').goodtree({
-					'expand_icon': 'images/expand_icon.png',
-					'contract_icon': 'images/contract_icon.png'
-				});
+				$('#tree').goodtree();
 			});
 		</script>
 
@@ -26,9 +23,20 @@
 			#tree li > .goodtree_toggle {
 				position: absolute;
 				display: inline-block;
+				background-position: center;
+				background-repeat: no-repeat;
 				height: 16px;
 				width: 16px;
+				cursor: pointer;
 			}
+
+				#tree li > div.closed {
+					background-image: url(images/expand_icon.png);
+				}
+
+				#tree li > div.open {
+					background-image: url(images/contract_icon.png);
+				}
 
 		</style>
 
