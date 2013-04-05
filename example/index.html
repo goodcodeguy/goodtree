@@ -2,11 +2,12 @@
 <html>
 	<head>
 		<title>Good Tree View</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../src/jquery-1.9.1.min.js"></script>
 		<script src="../src/goodtree.plugin.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#tree').goodtree();
+				var tree = $('#tree').goodtree({'focusElement': $('#poop')});
+
 			});
 		</script>
 
@@ -58,7 +59,7 @@
 						<span>Submenu Item 1</span>
 						<ul>
 							<li>Sub Submenu Item 1</li>
-							<li>Sub Submenu Item 2</li>
+							<li id='focus'>Sub Submenu Item 2</li>
 						</ul>
 					</li>
 				</ul>
