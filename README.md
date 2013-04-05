@@ -2,6 +2,8 @@
 
 This is a simple jQuery plugin for handling Tree Views.  Example of usage is in the example folder.
 
+[Demos](http://goodcodeguy.github.com/demos/goodtree/index.html "GoodTree Demos")
+
 ## Todo:
 
 - Documentation
