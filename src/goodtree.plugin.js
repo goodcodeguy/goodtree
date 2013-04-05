@@ -5,10 +5,10 @@
 			
 			// Default Settings
 			var settings = $.extend({
-				'expandIconClass' : 'closed',
-				'contractIconClass' : 'open',
-				'setFocus' : undefined,
-				'classPrefix' : 'goodtree_',
+  				'expandIconClass' : 'closed',
+  				'contractIconClass' : 'open',
+  				'setFocus' : undefined,
+  				'classPrefix' : 'goodtree_',
 				}, options);
 
 			return this.each(function() {
