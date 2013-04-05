@@ -3,9 +3,9 @@
 
 		// Default Settings
 		var settings = $.extend({
-			'expand_icon' : 'images/tree/expand.png',
-			'contract_icon' : 'images/tree/contract.png',
-			'class_prefix' : 'goodtree_',
+			'expandIconClass' : 'closed',
+			'contractIconClass' : 'open',
+			'classPrefix' : 'goodtree_',
 		}, options);
 
 		return this.each(function() {
@@ -15,14 +15,16 @@
 
 			// Add the plus minus buttons
 			$(this).find('li').each(function() {
-				if($(this).children('ul').length > 0) 
-					$(this).prepend("<div class='" + settings.class_prefix + "toggle closed'></div>");
+				if($(this).children('ul').length > 0)
+					$(this).prepend($('<div />', {'class': settings.classPrefix + "toggle " + settings.expandIconClass}));
 			});
 
 			// Events
-			$('.' + settings.class_prefix + 'toggle').click(function() {
+			$('.' + settings.classPrefix + 'toggle').click(function() {
 				$(this).parent().children('ul').toggle();
-				$(this).hasClass('open') ? $(this).removeClass('open').addClass('closed') : $(this).removeClass('closed').addClass('open');
+				$(this).hasClass('open') 
+					? $(this).removeClass(settings.contractIconClass).addClass(settings.expandIconClass) 
+					: $(this).removeClass(settings.expandIconClass).addClass(settings.contractIconClass);
 			});
 
 		});
