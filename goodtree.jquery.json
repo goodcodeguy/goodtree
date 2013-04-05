@@ -29,7 +29,8 @@
     "homepage": "https://github.com/goodcodeguy/goodtree",
     "docs": "https://github.com/goodcodeguy/goodtree",
     "download": "https://github.com/goodcodeguy/goodtree/zipball/master",
+    "demo": "http://goodcodeguy.github.com/demos/goodtree/index.html",
     "dependencies": {
-        "jquery": ">=1.9"
+        "jquery": ">=1.8"
     }
 }
