@@ -1,15 +1,34 @@
 (function ( $ ) {
 
+  var settings;
+
   var methods = {
     init : function(options) {
       
       // Default Settings
-      var settings = $.extend({
-          expandIconClass: 'closed',
-          contractIconClass: 'open',
-          toggleButtonClass: 'toggle',
-          setFocus: undefined
-        }, options);
+      settings = $.extend({
+        expandIconClass: 'closed',
+        contractIconClass: 'open',
+        toggleButtonClass: 'toggle',
+        animateActions: false,
+        openAnimation: {
+          height: "show",
+          marginTop: "show",
+          marginBottom: "show",
+          paddingTop: "show",
+          paddingBottom: "show"
+        },
+        openAnimationSpeed: 500,
+        closeAnimation: {
+          height: "hide",
+          marginTop: "hide",
+          marginBottom: "hide",
+          paddingTop: "hide",
+          paddingBottom: "hide"
+        },
+        closeAnimationSpeed: 100,
+        setFocus: undefined
+      }, options);
 
       return this.each(function() {
         var target = $(this);
@@ -20,15 +39,24 @@
               button;
 
           if(branches.length > 0) {
-            // Show animation if set
+
             branches.hide();
 
             button = $('<div />', {
               'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
               on: {
                 click: function(event) {
-                  branches.toggle();
-                  button.toggleClass(settings.expandIconClass + " " + settings.contractIconClass);
+                  if(settings.animateActions)
+                  {
+                    (button.hasClass('open')) 
+                      ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed);
+                      : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+                  }
+                  else
+                  {
+                    branches.toggle();
+                  }
+                  button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
                 }
               }
             });
@@ -53,6 +81,7 @@
           {
             return false;
           }
+          // Ignore Animation, makes it weird when it's a deep node
           $(this).show();
         });
       });
