@@ -5,47 +5,55 @@
       
       // Default Settings
       var settings = $.extend({
-          'expandIconClass' : 'closed',
-          'contractIconClass' : 'open',
-          'setFocus' : undefined,
-          'classPrefix' : 'goodtree_',
+          expandIconClass: 'closed',
+          contractIconClass: 'open',
+          toggleButtonClass: 'toggle',
+          setFocus: undefined
         }, options);
 
       return this.each(function() {
+        var target = $(this);
 
-        // Hide all of the children Elements
-        $(this).find('ul').hide();
+        target.find('li').each(function() {
+          var node = $(this),
+              branches = node.children('ul, ol'),
+              button;
 
-        // Add the plus minus buttons
-        $(this).find('li').each(function() {
-          if($(this).children('ul').length > 0)
-            $(this).prepend($('<div />', {'class': settings.classPrefix + "toggle " + settings.expandIconClass}));
-        });
+          if(branches.length > 0) {
+            // Show animation if set
+            branches.hide();
 
-        // Events
-        $('.' + settings.classPrefix + 'toggle').click(function() {
-          $(this).parent().children('ul').toggle();
-          $(this).hasClass('open') 
-            ? $(this).removeClass(settings.contractIconClass).addClass(settings.expandIconClass) 
-            : $(this).removeClass(settings.expandIconClass).addClass(settings.contractIconClass);
+            button = $('<div />', {
+              'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
+              on: {
+                click: function(event) {
+                  branches.toggle();
+                  button.toggleClass(settings.expandIconClass + " " + settings.contractIconClass);
+                }
+              }
+            });
+
+            node.prepend(button);
+          }
         });
 
         if(undefined !== settings.setFocus)
         {
-          $(this).goodtree('setFocus', settings.setFocus);
+          target.goodtree('setFocus', settings.setFocus);
         }
 
       });
     },
 
-    setFocus : function(obj) {
+    setFocus : function(element) {
       return this.each(function() {
-        var tree_parent = this;
-        $(obj).parents('ul').each(function() {
-          if($(this) === this)
-            return;
-          else
-            $(this).show();
+        var ancestor = $(this);
+        $(element).parents('ul, ol').each(function() {
+          if( $(this).is(ancestor) )
+          {
+            return false;
+          }
+          $(this).show();
         });
       });
     }
