@@ -1,4 +1,4 @@
-(function ( $ ) {
+(function ( $, undefined ) {
 
   var settings;
 
@@ -48,9 +48,7 @@
                 click: function(event) {
                   if(settings.animateActions)
                   {
-                    (button.hasClass('open')) 
-                      ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed);
-                      : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+                    (button.hasClass('open')) ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed) : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
                   }
                   else
                   {
@@ -67,24 +65,24 @@
 
         if(undefined !== settings.setFocus)
         {
-          target.goodtree('setFocus', settings.setFocus);
+          methods.setFocus(settings.setFocus);
         }
 
       });
     },
 
     setFocus : function(element) {
-      return this.each(function() {
-        var ancestor = $(this);
-        $(element).parents('ul, ol').each(function() {
-          if( $(this).is(ancestor) )
-          {
-            return false;
-          }
-          // Ignore Animation, makes it weird when it's a deep node
-          $(this).show();
-        });
+      
+      var ancestor = $(this);
+      $(element).parents('ul, ol').each(function() {
+        if( $(this).is(ancestor) )
+        {
+          return false;
+        }
+        // Ignore Animation, makes it weird when it's a deep node
+        $(this).show();
       });
+    
     }
   }
 
