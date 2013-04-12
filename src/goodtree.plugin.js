@@ -27,7 +27,7 @@
           paddingBottom: "hide"
         },
         closeAnimationSpeed: 100,
-        setFocus: undefined
+        reveal: undefined
       }, options);
 
       return this.each(function() {
@@ -63,15 +63,15 @@
           }
         });
 
-        if(undefined !== settings.setFocus)
+        if(undefined !== settings.reveal)
         {
-          methods.setFocus(settings.setFocus);
+          methods.reveal(settings.reveal);
         }
 
       });
     },
 
-    setFocus : function(element) {
+    reveal : function(element) {
       
       var ancestor = $(this);
       $(element).parents('ul, ol').each(function() {
