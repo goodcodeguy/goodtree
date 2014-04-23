@@ -10,6 +10,7 @@
         expandIconClass: 'closed',
         contractIconClass: 'open',
         toggleButtonClass: 'toggle',
+        builtTreeClass: 'loaded',
         animateActions: false,
         openAnimation: {
           height: "show",
@@ -38,28 +39,31 @@
               branches = node.children('ul, ol'),
               button;
 
-          if(branches.length > 0) {
+          // if(!node.children('div.toggle').first().hasClass(settings.builtTreeClass)) {
+          if(!node.children('div.toggle').hasClass(settings.builtTreeClass)) {
+            if(branches.length > 0) {
 
-            branches.hide();
+              branches.hide();
 
-            button = $('<div />', {
-              'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
-              on: {
-                click: function(event) {
-                  if(settings.animateActions)
-                  {
-                    (button.hasClass('open')) ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed) : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+              button = $('<div />', {
+                'class': settings.toggleButtonClass + ' ' + settings.expandIconClass + ' ' + settings.builtTreeClass,
+                on: {
+                  click: function(event) {
+                    if(settings.animateActions)
+                    {
+                      (button.hasClass('open')) ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed) : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+                    }
+                    else
+                    {
+                      branches.toggle();
+                    }
+                    button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
                   }
-                  else
-                  {
-                    branches.toggle();
-                  }
-                  button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
                 }
-              }
-            });
+              });
 
-            node.prepend(button);
+              node.prepend(button);
+            }
           }
         });
 
