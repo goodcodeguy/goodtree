@@ -41,40 +41,15 @@
 
         target.find('li').each(function() {
           var node = $(this),
-              branches = node.children('ul, ol'),
-              button;
+              branches = node.children('ul, ol');
 
-          if(!node.data("loaded"))
+          if(!node.data("loaded") && branches.length > 0)
           {
 
-            if(branches.length > 0) {
+            branches.hide();
+            node.prepend(methods.openCloseButton(branches));
+            node.data("loaded", true);
 
-              branches.hide();
-
-              button = $('<div />', {
-                'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
-                on: {
-                  click: function(event) {
-
-                    if(settings.animateActions)
-                    {
-                      (button.hasClass('open')) ?
-                            branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
-                          : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
-                    }
-                    else
-                    {
-                      branches.toggle();
-                    }
-
-                    button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
-                  }
-                }
-              });
-
-              node.prepend(button);
-              node.data("loaded", true);
-            }
           }
 
 
@@ -100,6 +75,31 @@
         $(this).show();
       });
 
+    },
+
+    openCloseButton : function(branches) {
+      button = $('<div />', {
+        'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
+        on: {
+          click: function(event) {
+
+            if(settings.animateActions)
+            {
+              (button.hasClass('open')) ?
+                    branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
+                  : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+            }
+            else
+            {
+              branches.toggle();
+            }
+
+            button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
+          }
+        }
+      });
+
+      return button;
     }
   }
 
