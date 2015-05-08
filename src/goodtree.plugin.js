@@ -1,5 +1,4 @@
 // TODO:
-// - abstract animations out to be seperate entities that can be overwritten
 // - json based tree generation (accept json object and generate tree from that json object)
 // - add lazy load option
 
@@ -62,8 +61,6 @@
     },
 
     reveal : function(element) {
-
-      var ancestor = $(this);
 
       $(element).parents('li').each(function() {
         $(this).children('div.' + settings.toggleButtonClass).click();
