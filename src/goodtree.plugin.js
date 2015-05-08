@@ -1,10 +1,10 @@
-(function ( $, undefined ) {
+;(function ( $, window, undefined ) {
 
   var settings;
 
   var methods = {
     init : function(options) {
-      
+
       // Default Settings
       settings = $.extend({
         expandIconClass: 'closed',
@@ -76,7 +76,7 @@
     },
 
     reveal : function(element) {
-      
+
       var ancestor = $(this);
       $(element).parents('ul, ol').each(function() {
         if( $(this).is(ancestor) )
@@ -86,7 +86,7 @@
         // Ignore Animation, makes it weird when it's a deep node
         $(this).show();
       });
-    
+
     }
   }
 
@@ -99,4 +99,4 @@
         $.error( 'Method ' +  method + ' does not exist on jQuery.goodtree' );
       }
   };
-}) ( jQuery );
+}) ( jQuery, window );
