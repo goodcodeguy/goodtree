@@ -1,3 +1,9 @@
+// TODO:
+// - refactor state code to use data attributes instead of css classes
+// - abstract animations out to be seperate entities that can be overwritten
+// - json based tree generation (accept json object and generate tree from that json object)
+// - add lazy load option
+
 ;(function ( $, window, undefined ) {
 
   var settings;
@@ -39,7 +45,6 @@
               branches = node.children('ul, ol'),
               button;
 
-          // if(!node.children('div.toggle').first().hasClass(settings.builtTreeClass)) {
           if(!node.children('div.toggle').hasClass(settings.builtTreeClass)) {
             if(branches.length > 0) {
 
@@ -51,7 +56,9 @@
                   click: function(event) {
                     if(settings.animateActions)
                     {
-                      (button.hasClass('open')) ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed) : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+                      (button.hasClass('open')) ?
+                            branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
+                          : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
                     }
                     else
                     {
