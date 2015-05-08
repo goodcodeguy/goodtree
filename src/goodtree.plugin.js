@@ -1,5 +1,4 @@
 // TODO:
-// - refactor state code to use data attributes instead of css classes
 // - abstract animations out to be seperate entities that can be overwritten
 // - json based tree generation (accept json object and generate tree from that json object)
 // - add lazy load option
@@ -41,7 +40,7 @@
 
         target.find('li').each(function() {
           var node = $(this),
-              branches = node.children('ul, ol');
+             branches = node.children('ul, ol');
 
           if(!node.data("loaded") && branches.length > 0)
           {
@@ -51,7 +50,6 @@
             node.data("loaded", true);
 
           }
-
 
         });
 
@@ -66,40 +64,49 @@
     reveal : function(element) {
 
       var ancestor = $(this);
-      $(element).parents('ul, ol').each(function() {
-        if( $(this).is(ancestor) )
-        {
-          return false;
-        }
-        // Ignore Animation, makes it weird when it's a deep node
-        $(this).show();
+
+      $(element).parents('li').each(function() {
+        $(this).children('div.' + settings.toggleButtonClass).click();
       });
 
     },
 
     openCloseButton : function(branches) {
-      button = $('<div />', {
+      var button = $('<div />',
+      {
         'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
         on: {
           click: function(event) {
+            var self = button;
 
-            if(settings.animateActions)
-            {
-              (button.hasClass('open')) ?
-                    branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
-                  : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
-            }
-            else
-            {
-              branches.toggle();
-            }
+            methods.animateActions(branches, self.data('open'));
 
-            button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
+            (self.data('open'))
+              ? button.removeClass(settings.contractIconClass).addClass(settings.expandIconClass)
+              : button.removeClass(settings.expandIconClass).addClass(settings.contractIconClass);
+
+            self.data('open', !self.data('open'));
           }
         }
       });
 
+      // Initialize buttons as closed
+      button.data('open', false);
+
       return button;
+    },
+
+    animateActions : function(branches, open) {
+      if(settings.animateActions)
+      {
+        (open)
+          ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
+          : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+      }
+      else
+      {
+        branches.toggle();
+      }
     }
   }
 
