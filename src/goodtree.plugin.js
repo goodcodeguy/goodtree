@@ -16,7 +16,6 @@
         expandIconClass: 'closed',
         contractIconClass: 'open',
         toggleButtonClass: 'toggle',
-        builtTreeClass: 'loaded',
         animateActions: false,
         openAnimation: {
           height: "show",
@@ -45,15 +44,18 @@
               branches = node.children('ul, ol'),
               button;
 
-          if(!node.children('div.toggle').hasClass(settings.builtTreeClass)) {
+          if(!node.data("loaded"))
+          {
+
             if(branches.length > 0) {
 
               branches.hide();
 
               button = $('<div />', {
-                'class': settings.toggleButtonClass + ' ' + settings.expandIconClass + ' ' + settings.builtTreeClass,
+                'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
                 on: {
                   click: function(event) {
+
                     if(settings.animateActions)
                     {
                       (button.hasClass('open')) ?
@@ -64,14 +66,18 @@
                     {
                       branches.toggle();
                     }
+
                     button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
                   }
                 }
               });
 
               node.prepend(button);
+              node.data("loaded", true);
             }
           }
+
+
         });
 
         if(undefined !== settings.reveal)
