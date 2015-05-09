@@ -1,16 +1,19 @@
-(function ( $, undefined ) {
+// TODO:
+// - json based tree generation (accept json object and generate tree from that json object)
+// - add lazy load option
+
+;(function ( $, window, undefined ) {
 
   var settings;
 
   var methods = {
     init : function(options) {
-      
+
       // Default Settings
       settings = $.extend({
         expandIconClass: 'closed',
         contractIconClass: 'open',
         toggleButtonClass: 'toggle',
-        builtTreeClass: 'loaded',
         animateActions: false,
         openAnimation: {
           height: "show",
@@ -36,35 +39,17 @@
 
         target.find('li').each(function() {
           var node = $(this),
-              branches = node.children('ul, ol'),
-              button;
+             branches = node.children('ul, ol');
 
-          // if(!node.children('div.toggle').first().hasClass(settings.builtTreeClass)) {
-          if(!node.children('div.toggle').hasClass(settings.builtTreeClass)) {
-            if(branches.length > 0) {
+          if(!node.data("loaded") && branches.length > 0)
+          {
 
-              branches.hide();
+            branches.hide();
+            node.prepend(methods.openCloseButton(branches));
+            node.data("loaded", true);
 
-              button = $('<div />', {
-                'class': settings.toggleButtonClass + ' ' + settings.expandIconClass + ' ' + settings.builtTreeClass,
-                on: {
-                  click: function(event) {
-                    if(settings.animateActions)
-                    {
-                      (button.hasClass('open')) ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed) : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
-                    }
-                    else
-                    {
-                      branches.toggle();
-                    }
-                    button.toggleClass(settings.expandIconClass + ' ' + settings.contractIconClass);
-                  }
-                }
-              });
-
-              node.prepend(button);
-            }
           }
+
         });
 
         if(undefined !== settings.reveal)
@@ -76,17 +61,49 @@
     },
 
     reveal : function(element) {
-      
-      var ancestor = $(this);
-      $(element).parents('ul, ol').each(function() {
-        if( $(this).is(ancestor) )
-        {
-          return false;
-        }
-        // Ignore Animation, makes it weird when it's a deep node
-        $(this).show();
+
+      $(element).parents('li').each(function() {
+        $(this).children('div.' + settings.toggleButtonClass).click();
       });
-    
+
+    },
+
+    openCloseButton : function(branches) {
+      var button = $('<div />',
+      {
+        'class': settings.toggleButtonClass + ' ' + settings.expandIconClass,
+        on: {
+          click: function(event) {
+            var self = button;
+
+            methods.animateActions(branches, self.data('open'));
+
+            (self.data('open'))
+              ? button.removeClass(settings.contractIconClass).addClass(settings.expandIconClass)
+              : button.removeClass(settings.expandIconClass).addClass(settings.contractIconClass);
+
+            self.data('open', !self.data('open'));
+          }
+        }
+      });
+
+      // Initialize buttons as closed
+      button.data('open', false);
+
+      return button;
+    },
+
+    animateActions : function(branches, open) {
+      if(settings.animateActions)
+      {
+        (open)
+          ? branches.animate(settings.closeAnimation, settings.closeAnimationSpeed)
+          : branches.animate(settings.openAnimation, settings.openAnimationSpeed);
+      }
+      else
+      {
+        branches.toggle();
+      }
     }
   }
 
@@ -99,4 +116,4 @@
         $.error( 'Method ' +  method + ' does not exist on jQuery.goodtree' );
       }
   };
-}) ( jQuery );
+}) ( jQuery, window );
